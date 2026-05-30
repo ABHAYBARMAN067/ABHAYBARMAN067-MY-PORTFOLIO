@@ -1,11 +1,35 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-light-bg: #e6e3de;
+  --color-light-surface: #efede8;
+  --color-light-elevated: #f5f3ef;
+  --color-light-text: #3d3a36;
+  --color-light-muted: #6e6962;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-light-bg);
+  --surface: var(--color-light-surface);
+  --elevated: var(--color-light-elevated);
+  --foreground: var(--color-light-text);
+  --muted: var(--color-light-muted);
 
   --container-width: 1200px;
 
   --transition-fast: 0.2s;
   --transition-normal: 0.3s;
+}
+
+.dark {
+  --background: #000000;
+  --surface: #0b0b0b;
+  --elevated: #151515;
+  --foreground: #ffffff;
+  --muted: #b8b8b8;
+  color-scheme: dark;
 }
 
 * {
@@ -51,4 +75,9 @@ a {
   max-width: var(--container-width);
   margin-inline: auto;
   padding-inline: 1rem;
+}
+
+::selection {
+  background: var(--foreground);
+  color: var(--background);
 }
