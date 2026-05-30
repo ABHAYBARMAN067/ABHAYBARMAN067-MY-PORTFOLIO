@@ -1,21 +1,14 @@
 'use client';
 
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
 
 export default function HeroSection() {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    // GSAP animation would go here
-    // For now, using CSS animations
-  }, []);
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white dark:bg-black">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-blue-50 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none" />
       
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center space-y-8 animate-fade-in">
@@ -28,8 +21,8 @@ export default function HeroSection() {
 
           {/* Main Headline */}
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
-              Hi, I'm Abhay
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
+              Hi, I&apos;m Abhay
             </h1>
             <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400">
               A passionate developer crafting beautiful & functional web experiences
@@ -44,7 +37,7 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link href="#projects" className="group inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 transform hover:scale-105">
+            <Link href="#projects" className="group inline-flex items-center justify-center px-8 py-3 rounded-lg bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 transform hover:scale-105">
               View My Work
               <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
