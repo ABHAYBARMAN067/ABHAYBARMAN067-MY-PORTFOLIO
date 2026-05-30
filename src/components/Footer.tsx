@@ -1,11 +1,11 @@
 'use client';
 
-import { Github, Linkedin, Codepen } from 'lucide-react';
+import { FaCodepen, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const socials = [
-  { icon: Github, href: 'https://github.com/yourusername', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
-  { icon: Codepen, href: 'https://codepen.io/yourusername', label: 'CodePen' },
+  { icon: FaGithub, href: 'https://github.com/yourusername', label: 'GitHub' },
+  { icon: FaLinkedin, href: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
+  { icon: FaCodepen, href: 'https://codepen.io/yourusername', label: 'CodePen' },
 ];
 
 export default function Footer() {
