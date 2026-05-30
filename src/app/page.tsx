@@ -1,7 +1,9 @@
+import HeroSection from '@/sections/hero';
+
 export default function Home() {
   return (
     <main>
-      <h1>Portfolio Home</h1>
+      <HeroSection />
     </main>
   );
 }
