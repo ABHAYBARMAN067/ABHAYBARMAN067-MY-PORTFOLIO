@@ -37,7 +37,7 @@ export default function Footer() {
 
         {/* Right text */}
         <p className="text-xs text-black/40 dark:text-white/40">
-          Built with Next.js ⚡
+          Built with Next.js 
         </p>
 
       </div>

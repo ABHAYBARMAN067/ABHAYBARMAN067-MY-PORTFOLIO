@@ -7,38 +7,34 @@ import { ArrowUpRight } from 'lucide-react';
 const projects = [
   {
     title: 'TripNest',
-    description: 'Airbnb-style booking platform with maps & auth.',
+    description: 'Airbnb-style booking platform with maps and authentication.',
     image: '/images/tripnest.png',
     tech: ['Next.js', 'TypeScript', 'MongoDB'],
     github: 'https://github.com/ABHAYBARMAN067/TripNext',
     live: '#',
+    category: 'Full Stack',
   },
-  {
-    title: 'Techfest IIT Bombay',
-    description: 'Animated landing page with GSAP.',
-    image: '/images/techfest.png',
-    tech: ['HTML', 'CSS', 'GSAP'],
-    github: '#',
-    live: '#',
-  },
+ 
   {
     title: 'BazarNow',
-    description: 'Full-stack e-commerce platform.',
+    description: 'Modern e-commerce platform built with MERN.',
     image: '/images/BazarNow.png',
-    tech: ['MERN', 'WebSocket'],
+    tech: ['MongoDB', 'Express', 'React', 'Node.js'],
     github: '#',
     live: '#',
+    category: 'MERN',
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-28 px-6 bg-white text-black dark:bg-black dark:text-white">
+    <section
+      id="projects"
+      className="py-24 px-6 bg-white text-black dark:bg-black dark:text-white"
+    >
       <div className="max-w-7xl mx-auto">
-
-        {/* Header */}
-        <div className="mb-16 flex justify-between items-end">
-          <h2 className="text-4xl font-black">
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl font-bold">
             <AnimatedText text="Featured Work" />
           </h2>
 
@@ -46,19 +42,21 @@ export default function Projects() {
             href="https://github.com/ABHAYBARMAN067"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100"
+            className="flex items-center gap-2"
           >
-            View GitHub <ArrowUpRight size={14} />
+            View GitHub
+            <ArrowUpRight size={16} />
           </a>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <ProjectCard key={i} project={project} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+            />
           ))}
         </div>
-
       </div>
     </section>
   );
