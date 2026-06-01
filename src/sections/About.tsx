@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { useTheme } from '../hooks/useTheme';
+import useTheme from '../hooks/useTheme';
 import AnimatedText from '../components/AnimatedText';
 
 export default function About() {
@@ -62,11 +61,9 @@ export default function About() {
 
         {/* RIGHT IMAGE */}
         <div className="flex justify-center lg:justify-end">
-          <Image
+          <img
             src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
             alt="Coding Animation"
-            width={500}
-            height={500}
             className="w-full max-w-md rounded-2xl shadow-2xl"
           />
         </div>
