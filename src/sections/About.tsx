@@ -1,72 +1,76 @@
 'use client';
 
+import Image from 'next/image';
+import { useTheme } from '../hooks/useTheme';
+import AnimatedText from '../components/AnimatedText';
+
 export default function About() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <section
       id="about"
-      className="mx-auto max-w-6xl px-6 py-24"
+      className={`py-28 px-6 transition-colors duration-500 ${
+        isDark ? 'bg-black' : 'bg-light-bg'
+      }`}
     >
-      <div className="mb-12">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-red-500">
-          About Me
-        </p>
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-          Building modern web experiences with code.
-        </h2>
-      </div>
-
-      <div className="grid gap-10 md:grid-cols-2">
+        {/* LEFT CONTENT */}
         <div>
-          <p className="mb-5 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            Hi, I'm <span className="font-semibold">Abhay Barman</span>, a
-            passionate Full Stack Developer and B.Tech student. I enjoy
-            building modern, responsive, and user-friendly web applications
-            using the latest technologies.
+          <p
+            className={`font-mono text-xs tracking-widest mb-4 ${
+              isDark ? 'text-white/30' : 'text-black/30'
+            }`}
+          >
+            01 / ABOUT
           </p>
 
-          <p className="mb-5 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            My primary focus is on React, Next.js, Node.js, MongoDB, and
-            TypeScript. I love solving real-world problems and turning ideas
-            into functional digital products.
-          </p>
+          <h2
+            className={`text-4xl sm:text-5xl font-black tracking-tight mb-6 ${
+              isDark ? 'text-white' : 'text-black'
+            }`}
+          >
+            <AnimatedText text="Crafting Digital" />
+            <br />
+            <span className="text-gradient">
+              <AnimatedText text="Experiences" />
+            </span>
+          </h2>
 
-          <p className="text-lg leading-8 text-gray-600 dark:text-gray-400">
-            Currently, I am working on projects that strengthen my skills in
-            full-stack development, system design, and modern web
-            technologies.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-gray-200 p-6 dark:border-gray-800">
-            <h3 className="mb-2 text-3xl font-bold">10+</h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Projects Built
+          <div
+            className={`space-y-4 leading-relaxed ${
+              isDark ? 'text-white/60' : 'text-black/60'
+            }`}
+          >
+            <p>
+              I&apos;m <strong>Abhay Barman</strong>, a MERN Stack Developer who
+              loves building full-stack web applications.
             </p>
-          </div>
 
-          <div className="rounded-2xl border border-gray-200 p-6 dark:border-gray-800">
-            <h3 className="mb-2 text-3xl font-bold">2+</h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Years Learning
+            <p>
+              My journey started with curiosity about how the web works and
+              evolved into building real-world projects.
             </p>
-          </div>
 
-          <div className="rounded-2xl border border-gray-200 p-6 dark:border-gray-800">
-            <h3 className="mb-2 text-3xl font-bold">5+</h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Technologies
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-gray-200 p-6 dark:border-gray-800">
-            <h3 className="mb-2 text-3xl font-bold">100%</h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Dedication
+            <p>
+              I focus on writing clean, scalable, and efficient code.
             </p>
           </div>
         </div>
+
+        {/* RIGHT IMAGE */}
+        <div className="flex justify-center lg:justify-end">
+          <Image
+            src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
+            alt="Coding Animation"
+            width={500}
+            height={500}
+            className="w-full max-w-md rounded-2xl shadow-2xl"
+          />
+        </div>
+
       </div>
     </section>
   );
