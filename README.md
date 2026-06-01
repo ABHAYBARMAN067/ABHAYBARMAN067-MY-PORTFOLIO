@@ -1,4 +1,4 @@
-# MY-PORTFOLIO-test
+# MY-PORTFOLIO
 
 A  personal portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
 
