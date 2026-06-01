@@ -15,7 +15,7 @@ export default function MagneticButton({
   onClick,
   className = '',
 }: MagneticButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const button = buttonRef.current;
@@ -30,7 +30,6 @@ export default function MagneticButton({
       const maxDistance = 100;
 
       if (distance < maxDistance) {
-        const force = (1 - distance / maxDistance) * 20;
         button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
       } else {
         button.style.transform = 'translate(0, 0)';
@@ -64,13 +63,25 @@ export default function MagneticButton({
     );
   }
 
+  if (onClick) {
+    return (
+      <button
+        ref={buttonRef as React.Ref<HTMLButtonElement>}
+        type="button"
+        onClick={onClick}
+        className={`transition-transform duration-100 ${className}`}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return (
-    <button
-      ref={buttonRef as React.Ref<HTMLButtonElement>}
-      onClick={onClick}
-      className={`transition-transform duration-100 ${className}`}
+    <span
+      ref={buttonRef}
+      className={`inline-block transition-transform duration-100 ${className}`}
     >
       {children}
-    </button>
+    </span>
   );
 }
