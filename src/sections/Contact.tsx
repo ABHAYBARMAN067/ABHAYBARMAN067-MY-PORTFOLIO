@@ -53,7 +53,7 @@ export default function Contact() {
               isDark ? 'text-white/70' : 'text-black/70'
             }`}
           >
-            Let's create something amazing. Feel free to reach out and let's discuss your next project!
+            Let&apos;s create something amazing. Feel free to reach out and let&apos;s discuss your next project!
           </p>
         </motion.div>
 
