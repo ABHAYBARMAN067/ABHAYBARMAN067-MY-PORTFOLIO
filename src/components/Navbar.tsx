@@ -19,11 +19,11 @@ export default function Navbar() {
           AB
         </a>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-8">
           {navLinks.map((link) => (
             <button
               key={link.label}
-              className="rounded-full px-4 py-2 text-sm font-medium text-light-muted transition-all hover:bg-light-surface hover:text-light-text dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white"
+              className="rounded-full px-6 py-2 text-sm font-medium text-light-muted transition-all hover:bg-light-surface hover:text-light-text dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white"
             >
               {link.label}
             </button>

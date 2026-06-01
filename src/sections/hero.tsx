@@ -37,6 +37,7 @@ export default function HeroSection() {
                 text="A passionate developer crafting beautiful and functional web experiences"
                 speed={45}
                 delay={450}
+                loop={true}
               />
             </p>
           </div>
