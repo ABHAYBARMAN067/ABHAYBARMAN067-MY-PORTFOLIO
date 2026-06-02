@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight, Download, FileText } from 'lucide-react';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/useTheme';
 import AnimatedText from '../components/AnimatedText';
 
 export default function Contact() {

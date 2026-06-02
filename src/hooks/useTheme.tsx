@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { ThemeContext } from '@/app/providers';
 
-export default function useTheme() {
+export function useTheme() {
   const context = useContext(ThemeContext);
 
   if (!context) {

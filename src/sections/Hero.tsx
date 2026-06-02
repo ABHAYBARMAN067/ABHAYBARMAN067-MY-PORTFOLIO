@@ -12,7 +12,7 @@ import GetTouchButton from '../components/GetTouchButton';
 
 // Utility and Hook imports
 import { scrollToSection } from '@/lib/scrollToSection';
-import useTheme from '../hooks/useTheme';
+import { useTheme } from '../hooks/useTheme';
 import useTypingEffect from '../hooks/useTypingEffect';
 
 const phrases = [
