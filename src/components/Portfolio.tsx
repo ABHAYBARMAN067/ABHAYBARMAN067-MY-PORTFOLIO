@@ -1,82 +1,55 @@
 'use client';
 
-import { Code, ExternalLink } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+  
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Hero from '@/sections/Hero';
+import About from '@/sections/About';
+import Skills from '@/sections/Skills';
+import Projects from '@/sections/Projects';
+import Experience from '@/sections/Experience';
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'E-Commerce Platform',
-    description: 'Modern e-commerce with cart & checkout.',
-    tags: ['Next.js', 'React', 'Stripe'],
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: 2,
-    title: 'Task Manager',
-    description: 'Real-time collaborative task app.',
-    tags: ['React', 'Firebase'],
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: 3,
-    title: 'Analytics Dashboard',
-    description: 'Data visualization dashboard.',
-    tags: ['React', 'D3.js'],
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-];
+import Contact from '@/sections/Contact';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function Portfolio() {
+  const [loading, setLoading] = useState(true);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2200);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <section className="px-5 py-20 bg-light-surface dark:bg-black text-light-text dark:text-white">
-      <div className="max-w-6xl mx-auto text-center mb-10">
-        <h2 className="text-3xl font-bold">Featured Projects</h2>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-3">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="p-6 border rounded-lg hover:shadow-xl transition"
-          >
-            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-sm opacity-70 mb-4">{project.description}</p>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tags.map((tag) => (
-                <span key={tag} className="text-xs px-2 py-1 border rounded">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex gap-3">
-              {project.liveUrl && (
-                <a href={project.liveUrl} className="flex items-center gap-1 text-sm">
-                  <ExternalLink size={14} /> Live
-                </a>
-              )}
-              {project.githubUrl && (
-                <a href={project.githubUrl} className="flex items-center gap-1 text-sm">
-                  <Code size={14} /> Code
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+  
+      <motion.div
+        className={`min-h-screen cursor-none transition-colors duration-500 ${
+          isDark ? 'bg-black text-white' : 'bg-light-bg text-light-text'
+        }`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loading ? 0 : 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+       
+          <>
+            <Navbar />
+            <main className="relative z-10">
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <Experience />
+           
+              <Contact />
+            </main>
+            <Footer />
+          </>
+   
+      </motion.div>
+   
   );
 }
