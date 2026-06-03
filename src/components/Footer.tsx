@@ -6,7 +6,7 @@ import { useTheme } from '../hooks/useTheme';
 
 const socials = [
   { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
- 
+
 ];
 
 export default function Footer() {
