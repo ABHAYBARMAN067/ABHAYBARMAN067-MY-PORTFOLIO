@@ -1,27 +1,18 @@
 'use client';
 
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 
 interface GetTouchButtonProps {
-  email?: string;
   onClick?: () => void;
   className?: string;
 }
 
 export default function GetTouchButton({
-  email = 'your-email@example.com',
   onClick,
   className = '',
 }: GetTouchButtonProps) {
   const handleClick = () => {
-    if (onClick) {
-      onClick();
-      return;
-    }
-
-    const subject = 'Let\'s Connect';
-    const body = 'Hi! I\'d like to get in touch with you.';
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    onClick?.();
   };
 
   return (
@@ -29,16 +20,19 @@ export default function GetTouchButton({
       onClick={handleClick}
       className={`
         group relative px-8 py-3 rounded-full
-        bg-black dark:bg-white text-white dark:text-black
+        border-2 border-black dark:border-white
+        text-black dark:text-white
         font-semibold text-lg
-        hover:shadow-lg transition-all duration-300
+        hover:bg-black dark:hover:bg-white
+        hover:text-white dark:hover:text-black
+        transition-all duration-300
         flex items-center gap-2
         ${className}
       `}
     >
       <Mail size={20} />
-      <span>Get in Touch</span>
-      <ArrowRight
+      <span>Get In Touch</span>
+      <Send
         size={18}
         className="group-hover:translate-x-1 transition-transform"
       />

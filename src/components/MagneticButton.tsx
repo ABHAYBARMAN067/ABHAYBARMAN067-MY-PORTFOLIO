@@ -1,87 +1,39 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
-interface MagneticButtonProps {
-  children: React.ReactNode;
-  href?: string;
-  onClick?: () => void;
+interface MagneticProps {
+  children: ReactNode;
   className?: string;
+  strength?: number;
 }
 
-export default function MagneticButton({
-  children,
-  href,
-  onClick,
-  className = '',
-}: MagneticButtonProps) {
-  const buttonRef = useRef<HTMLElement>(null);
+export default function MagneticButton({ children, className = '', strength = 0.3 }: MagneticProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const button = buttonRef.current;
-    if (!button) return;
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * strength;
+    const y = (e.clientY - rect.top - rect.height / 2) * strength;
+    setPosition({ x, y });
+  };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = button.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      const distance = Math.sqrt(x * x + y * y);
-      const maxDistance = 100;
-
-      if (distance < maxDistance) {
-        button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-      } else {
-        button.style.transform = 'translate(0, 0)';
-      }
-    };
-
-    const handleMouseLeave = () => {
-      button.style.transform = 'translate(0, 0)';
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    button.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      button.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  if (href) {
-    return (
-      <a
-        ref={buttonRef as React.Ref<HTMLAnchorElement>}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`inline-block transition-transform duration-100 ${className}`}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  if (onClick) {
-    return (
-      <button
-        ref={buttonRef as React.Ref<HTMLButtonElement>}
-        type="button"
-        onClick={onClick}
-        className={`transition-transform duration-100 ${className}`}
-      >
-        {children}
-      </button>
-    );
-  }
+  const reset = () => setPosition({ x: 0, y: 0 });
 
   return (
-    <span
-      ref={buttonRef}
-      className={`inline-block transition-transform duration-100 ${className}`}
+    <motion.div
+      ref={ref}
+      className={className}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: 'spring', damping: 15, stiffness: 150, mass: 0.1 }}
     >
       {children}
-    </span>
+    </motion.div>
   );
 }

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
-import { scrollToSection } from '@/lib/scrollToSection';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -40,7 +39,9 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
-    scrollToSection(href.replace('#', ''));
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrolledBg = isDark
@@ -90,7 +91,7 @@ export default function Navbar() {
               </button>
             ))}
             <ThemeToggle />
-            {/* <button
+            <button
               onClick={() => handleNavClick('#contact')}
               className={`px-4 py-2 text-sm font-medium rounded transition-all duration-300 ${
                 isDark
@@ -99,7 +100,7 @@ export default function Navbar() {
               }`}
             >
               Hire Me
-            </button> */}
+            </button>
           </div>
 
           <div className="md:hidden flex items-center gap-3">
@@ -136,7 +137,7 @@ export default function Navbar() {
                 {link.label}
               </motion.button>
             ))}
-            {/* <motion.button
+            <motion.button
               onClick={() => handleNavClick('#contact')}
               className={`mt-4 px-8 py-3 rounded transition-all duration-300 ${
                 isDark ? 'border border-white/30 text-white hover:bg-white hover:text-black' : 'border border-black/30 text-black hover:bg-black hover:text-white'
@@ -147,7 +148,7 @@ export default function Navbar() {
               transition={{ delay: navLinks.length * 0.06 }}
             >
               Hire Me
-            </motion.button> */}
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,17 +1,19 @@
-
-
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Github, Linkedin, Codepen } from 'lucide-react';
-import useTypingEffect from '../hooks/useTypingEffect';
-import { useTheme } from '../hooks/useTheme';
+import gsap from 'gsap';
+
+// Component imports
 import MagneticButton from '../components/MagneticButton';
 import ResumeButton from '../components/ResumeButton';
 import GetTouchButton from '../components/GetTouchButton';
+
+// Utility and Hook imports
 import { scrollToSection } from '@/lib/scrollToSection';
-import gsap from 'gsap';
+import { useTheme } from '../hooks/useTheme';
+import useTypingEffect from '../hooks/useTypingEffect';
 
 const phrases = [
   'MERN Stack Developer',
@@ -21,11 +23,10 @@ const phrases = [
   // 'Node.js Builder',
 ];
 
-
 const socials = [
-  { icon: Github, href: '', label: 'GitHub' },
-  { icon: Linkedin, href: '', label: 'LinkedIn' },
-  { icon: Codepen, href: '', label: 'CodePen' },
+  { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/', label: 'LinkedIn' },
+  { icon: Codepen, href: 'https://codepen.io/Abhay-Barman', label: 'CodePen' },
 ];
 
 const container = {
@@ -132,7 +133,17 @@ function MagneticName({
 export default function Hero() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const typed = useTypingEffect(phrases[0]);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const currentPhrase = phrases[phraseIndex] ?? '';
+  const typed = useTypingEffect(currentPhrase, { speed: 80, delay: 250 });
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setPhraseIndex((index) => (index + 1) % phrases.length);
+    }, currentPhrase.length * 80 + 1800);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentPhrase]);
 
   const scrollToContact = () => scrollToSection('contact');
 
@@ -140,28 +151,24 @@ export default function Hero() {
 
   return (
     <section
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 transition-colors duration-500 ${
+      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 transition-colors duration-500 perspective-distant ${
         isDark ? 'bg-black text-white' : 'bg-light-bg text-light-text'
       }`}
     >
-      <motion.div className="relative z-10 text-center max-w-5xl" variants={container} initial="hidden" animate="show">
-        {/* <motion.div variants={item} className="inline-flex items-center gap-2 mb-8">
-          <motion.span
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono tracking-widest border transition-colors duration-500 ${
-              isDark ? 'border-white/10 bg-white/[0.03] text-white/60' : 'border-black/10 bg-black/[0.03] text-black/60'
-            }`}
-            whileHover={{ scale: 1.05 }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-slow" />Open to Opportunities
-          </motion.span>
-        </motion.div> */}
-
+      <motion.div 
+        className="relative z-10 text-center max-w-5xl" 
+        variants={container} 
+        initial="hidden" 
+        animate="show"
+      >
+        {/* Name Header Section */}
         <motion.h1 variants={item} className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.92] mb-6 transform-3d">
           <MagneticName text="Abhay" hoverColor isDark={isDark} className={nameClass} />
           <br />
           <MagneticName text="Barman" hoverColor isDark={isDark} className={`${nameClass} transform-3d`} />
         </motion.h1>
 
+        {/* Typing Effect Section */}
         <motion.div variants={item} className="h-10 mb-6 flex items-center justify-center">
           <span className={`font-mono text-xl sm:text-2xl tracking-wide ${isDark ? 'text-white/70' : 'text-black/70'}`}>
             {typed}
@@ -169,6 +176,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
+        {/* Description Section */}
         <motion.p
           variants={item}
           className={`text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-10 ${isDark ? 'text-white/40' : 'text-black/40'}`}
@@ -176,8 +184,8 @@ export default function Hero() {
           Crafting performant, scalable web applications with the MERN stack. Turning complex problems into elegant digital experiences.
         </motion.p>
 
-        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4 mb-12">
-          
+        {/* CTA Buttons Section */}
+        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4 mb-12 perspective-distant">
           <div className="h-12 flex items-center justify-center">
             <MagneticButton>
               <GetTouchButton onClick={scrollToContact} />
@@ -189,28 +197,27 @@ export default function Hero() {
               <ResumeButton />
             </MagneticButton>
           </div>
-
         </motion.div>
 
-        <motion.div variants={item} className="flex items-center justify-center gap-2 mb-12">
+        {/* Social Icons Section */}
+        <motion.div variants={item} className="flex items-center justify-center gap-2">
           {socials.map(({ icon: Icon, href, label }) => (
-            <MagneticButton key={label}>
-              <motion.a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className={`w-10 h-10 flex items-center justify-center border rounded transition-all duration-300 ${
-                  isDark
-                    ? 'border-white/10 text-white/40 hover:text-white hover:border-white/30'
-                    : 'border-black/10 text-black/40 hover:text-black hover:border-black/30'
-                }`}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Icon size={17} />
-              </motion.a>
-            </MagneticButton>
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={`w-10 h-10 flex items-center justify-center border rounded transition-all duration-300 ${
+                isDark
+                  ? 'border-white/10 text-white/40 hover:text-white hover:border-white/30'
+                  : 'border-black/10 text-black/40 hover:text-black hover:border-black/30'
+              }`}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Icon size={17} />
+            </motion.a>
           ))}
         </motion.div>
       </motion.div>

@@ -1,16 +1,26 @@
-'use client';
+import type Lenis from 'lenis';
 
-export function scrollToSection(sectionId: string) {
-  const id = sectionId.replace(/^#/, '');
-  const el = document.getElementById(id);
+let lenis: Lenis | null = null;
 
-  if (!el) return;
+const NAV_OFFSET = -88;
 
-  // If you later add a fixed navbar, adjust this offset.
-  const offset = 0;
-  const rect = el.getBoundingClientRect();
-  const top = window.scrollY + rect.top - offset;
-
-  window.scrollTo({ top, behavior: 'smooth' });
+export function registerLenis(instance: Lenis) {
+  lenis = instance;
 }
 
+export function unregisterLenis() {
+  lenis = null;
+}
+
+export function scrollToSection(sectionId: string) {
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+
+  if (lenis) {
+    lenis.scrollTo(el, { offset: NAV_OFFSET, programmatic: true });
+    return;
+  }
+
+  const top = el.getBoundingClientRect().top + window.scrollY + NAV_OFFSET;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
