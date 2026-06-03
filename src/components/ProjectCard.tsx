@@ -13,7 +13,7 @@ const quick = { duration: 0.2, ease: [0.22, 1, 0.36, 1] as const };
 type Project = {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   tech: string[];
   github: string;
   live: string;
@@ -38,22 +38,29 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
       transition={snap}
     >
       <div className="relative h-48 overflow-hidden rounded-t-2xl bg-black">
-        <motion.div
-          className="absolute inset-[-8%] origin-center will-change-transform"
-          animate={{
-            scale: hovered ? 1.14 : 1.06,
-            opacity: hovered ? 1 : 0.55,
-          }}
-          transition={quick}
-        >
-          <Image
-            src={project.image}
-            alt={project.title}
-            className="h-full w-full object-cover"
-            fill
-            priority={index === 0}
-          />
-        </motion.div>
+        {project.image && (
+          <motion.div
+            className="absolute inset-[-8%] origin-center will-change-transform"
+            animate={{
+              scale: hovered ? 1.14 : 1.06,
+              opacity: hovered ? 1 : 0.55,
+            }}
+            transition={quick}
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              className="h-full w-full object-cover"
+              fill
+              priority={index === 0}
+            />
+          </motion.div>
+        )}
+        {!project.image && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/20 flex items-center justify-center">
+            <p className={`text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>No image available</p>
+          </div>
+        )}
 
         <div
           className={`pointer-events-none absolute inset-0 z-1 transition-opacity duration-200 ${hovered ? 'opacity-90' : 'opacity-100'} bg-linear-to-b from-transparent ${isDark ? 'via-black/10 to-black/90' : 'via-white/10 to-white/90'}`}

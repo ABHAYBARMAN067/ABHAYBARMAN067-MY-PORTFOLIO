@@ -17,7 +17,6 @@ const projects = [
 {
   title: 'IIT Bombay Techfest Landing Page',
   description: 'A modern, responsive, and animated landing page for Techfest IIT Bombay built using HTML, CSS, and JavaScript with GSAP animations, scroll effects, and mobile-friendly navigation.',
-  image: '',
   tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger'],
   github: '',
   live: '#',
