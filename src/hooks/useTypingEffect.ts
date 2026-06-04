@@ -1,53 +1,40 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-interface UseTypingEffectOptions {
-  speed?: number;
-  delay?: number;
-  loop?: boolean;
-}
-
-export default function useTypingEffect(
-  text: string,
-  { speed = 80, delay = 1200, loop = false }: UseTypingEffectOptions = {},
-) {
-  const [displayedText, setDisplayedText] = useState('');
+export default function useTypingEffect(phrases: string[], speed = 80, deleteSpeed = 50, pauseTime = 2000) {
+  const [displayed, setDisplayed] = useState('');
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    let index = 0;
-    let timeoutId: ReturnType<typeof setTimeout>;
-    let cancelled = false;
+    const current = phrases[phraseIndex];
 
-    const typeNext = () => {
-      if (cancelled) {
-        return;
-      }
+    if (!deleting && charIndex < current.length) {
+      const t = setTimeout(() => setCharIndex((c) => c + 1), speed);
+      return () => clearTimeout(t);
+    }
 
-      setDisplayedText(text.slice(0, index));
-      index += 1;
+    if (!deleting && charIndex === current.length) {
+      const t = setTimeout(() => setDeleting(true), pauseTime);
+      return () => clearTimeout(t);
+    }
 
-      if (index <= text.length) {
-        timeoutId = setTimeout(typeNext, speed);
-        return;
-      }
+    if (deleting && charIndex > 0) {
+      const t = setTimeout(() => setCharIndex((c) => c - 1), deleteSpeed);
+      return () => clearTimeout(t);
+    }
 
-      if (loop) {
-        timeoutId = setTimeout(() => {
-          index = 0;
-          setDisplayedText('');
-          typeNext();
-        }, delay);
-      }
-    };
+    if (deleting && charIndex === 0) {
+      setDeleting(false);
+      setPhraseIndex((i) => (i + 1) % phrases.length);
+    }
+  }, [charIndex, deleting, phraseIndex, phrases, speed, deleteSpeed, pauseTime]);
 
-    timeoutId = setTimeout(typeNext, delay);
+  useEffect(() => {
+    setDisplayed(phrases[phraseIndex].slice(0, charIndex));
+  }, [charIndex, phraseIndex, phrases]);
 
-    return () => {
-      cancelled = true;
-      clearTimeout(timeoutId);
-    };
-  }, [delay, loop, speed, text]);
-
-  return displayedText;
+  return displayed;
 }
