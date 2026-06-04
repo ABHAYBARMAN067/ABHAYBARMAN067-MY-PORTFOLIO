@@ -1,19 +1,17 @@
+
+
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { Github, Linkedin, Codepen } from 'lucide-react';
-import gsap from 'gsap';
-
-// Component imports
+import useTypingEffect from '../hooks/useTypingEffect';
+import { useTheme } from '../hooks/useTheme';
 import MagneticButton from '../components/MagneticButton';
 import ResumeButton from '../components/ResumeButton';
 import GetTouchButton from '../components/GetTouchButton';
-
-// Utility and Hook imports
 import { scrollToSection } from '@/lib/scrollToSection';
-import { useTheme } from '../hooks/useTheme';
-import useTypingEffect from '../hooks/useTypingEffect';
+import gsap from 'gsap';
 
 const phrases = [
   'MERN Stack Developer',
@@ -22,6 +20,7 @@ const phrases = [
   'Freelancer',
   // 'Node.js Builder',
 ];
+
 
 const socials = [
   { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
@@ -57,7 +56,7 @@ function MagneticName({
     const chars = containerRef.current?.querySelectorAll<HTMLSpanElement>('.char');
     if (!chars || chars.length === 0) return;
 
-    const mouse = { x: 0, y: 0 };
+    let mouse = { x: 0, y: 0 };
 
     const handleMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
@@ -120,9 +119,9 @@ function MagneticName({
   }, [className, hoverColor, isDark, baseColor]);
 
   return (
-    <div ref={containerRef} className={`inline-block cursor-default transform-3d ${className ?? ''}`}>
+    <div ref={containerRef} className={`inline-block cursor-default [transform-style:preserve-3d] ${className ?? ''}`}>
       {text.split('').map((char, i) => (
-        <span key={i} className="char inline-block transform-3d select-none">
+        <span key={i} className="char inline-block [transform-style:preserve-3d] select-none">
           {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
@@ -133,17 +132,7 @@ function MagneticName({
 export default function Hero() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const currentPhrase = phrases[phraseIndex] ?? '';
-  const typed = useTypingEffect(currentPhrase, { speed: 80, delay: 250 });
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setPhraseIndex((index) => (index + 1) % phrases.length);
-    }, currentPhrase.length * 80 + 1800);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [currentPhrase]);
+  const typed = useTypingEffect(phrases);
 
   const scrollToContact = () => scrollToSection('contact');
 
@@ -151,24 +140,28 @@ export default function Hero() {
 
   return (
     <section
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 transition-colors duration-500 perspective-distant ${
+      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 transition-colors duration-500 [perspective:1200px] ${
         isDark ? 'bg-black text-white' : 'bg-light-bg text-light-text'
       }`}
     >
-      <motion.div 
-        className="relative z-10 text-center max-w-5xl" 
-        variants={container} 
-        initial="hidden" 
-        animate="show"
-      >
-        {/* Name Header Section */}
-        <motion.h1 variants={item} className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.92] mb-6 transform-3d">
+      <motion.div className="relative z-10 text-center max-w-5xl" variants={container} initial="hidden" animate="show">
+        {/* <motion.div variants={item} className="inline-flex items-center gap-2 mb-8">
+          <motion.span
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono tracking-widest border transition-colors duration-500 ${
+              isDark ? 'border-white/10 bg-white/[0.03] text-white/60' : 'border-black/10 bg-black/[0.03] text-black/60'
+            }`}
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-slow" />Open to Opportunities
+          </motion.span>
+        </motion.div> */}
+
+        <motion.h1 variants={item} className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.92] mb-6 [transform-style:preserve-3d]">
           <MagneticName text="Abhay" hoverColor isDark={isDark} className={nameClass} />
           <br />
-          <MagneticName text="Barman" hoverColor isDark={isDark} className={`${nameClass} transform-3d`} />
+          <MagneticName text="Barman" hoverColor isDark={isDark} className={`${nameClass} [transform-style:preserve-3d]`} />
         </motion.h1>
 
-        {/* Typing Effect Section */}
         <motion.div variants={item} className="h-10 mb-6 flex items-center justify-center">
           <span className={`font-mono text-xl sm:text-2xl tracking-wide ${isDark ? 'text-white/70' : 'text-black/70'}`}>
             {typed}
@@ -176,7 +169,6 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Description Section */}
         <motion.p
           variants={item}
           className={`text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-10 ${isDark ? 'text-white/40' : 'text-black/40'}`}
@@ -184,40 +176,41 @@ export default function Hero() {
           Crafting performant, scalable web applications with the MERN stack. Turning complex problems into elegant digital experiences.
         </motion.p>
 
-        {/* CTA Buttons Section */}
-        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4 mb-12 perspective-distant">
-          <div className="h-12 flex items-center justify-center">
-            <MagneticButton>
+        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4 mb-12 [perspective:1200px]">
+          
+          <div className="h-[48px] flex items-center justify-center">
+            <MagneticButton strength={0.2}>
               <GetTouchButton onClick={scrollToContact} />
             </MagneticButton>
           </div>
 
-          <div className="h-12 flex items-center justify-center">
-            <MagneticButton>
+          <div className="h-[48px] flex items-center justify-center">
+            <MagneticButton strength={0.2}>
               <ResumeButton />
             </MagneticButton>
           </div>
+
         </motion.div>
 
-        {/* Social Icons Section */}
-        <motion.div variants={item} className="flex items-center justify-center gap-2">
+        <motion.div variants={item} className="flex items-center justify-center gap-2 mb-12">
           {socials.map(({ icon: Icon, href, label }) => (
-            <motion.a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className={`w-10 h-10 flex items-center justify-center border rounded transition-all duration-300 ${
-                isDark
-                  ? 'border-white/10 text-white/40 hover:text-white hover:border-white/30'
-                  : 'border-black/10 text-black/40 hover:text-black hover:border-black/30'
-              }`}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Icon size={17} />
-            </motion.a>
+            <MagneticButton key={label} strength={0.4}>
+              <motion.a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={`w-10 h-10 flex items-center justify-center border rounded transition-all duration-300 ${
+                  isDark
+                    ? 'border-white/10 text-white/40 hover:text-white hover:border-white/30'
+                    : 'border-black/10 text-black/40 hover:text-black hover:border-black/30'
+                }`}
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Icon size={17} />
+              </motion.a>
+            </MagneticButton>
           ))}
         </motion.div>
       </motion.div>
