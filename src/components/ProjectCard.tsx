@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
-import { useMounted } from '../hooks/useMounted';
 
 const snap = { type: 'spring' as const, stiffness: 520, damping: 28 };
 const quick = { duration: 0.2, ease: [0.22, 1, 0.36, 1] as const };
@@ -13,7 +11,7 @@ const quick = { duration: 0.2, ease: [0.22, 1, 0.36, 1] as const };
 type Project = {
   title: string;
   description: string;
-  image?: string;
+  image: string;
   tech: string[];
   github: string;
   live: string;
@@ -29,7 +27,11 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project, index, visible, isDark }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
-  const isMounted = useMounted();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const cardContent = (
     <motion.article
@@ -38,45 +40,37 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
       transition={snap}
     >
       <div className="relative h-48 overflow-hidden rounded-t-2xl bg-black">
-        {project.image && (
-          <motion.div
-            className="absolute inset-[-8%] origin-center will-change-transform"
-            animate={{
-              scale: hovered ? 1.14 : 1.06,
-              opacity: hovered ? 1 : 0.55,
-            }}
-            transition={quick}
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              className="h-full w-full object-cover"
-              fill
-              priority={index === 0}
-            />
-          </motion.div>
-        )}
-        {!project.image && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/20 flex items-center justify-center">
-            <p className={`text-sm ${isDark ? 'text-white/30' : 'text-black/30'}`}>No image available</p>
-          </div>
-        )}
+        <motion.div
+          className="absolute inset-[-8%] origin-center will-change-transform"
+          animate={{
+            scale: hovered ? 1.14 : 1.06,
+            opacity: hovered ? 1 : 0.55,
+          }}
+          transition={quick}
+        >
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-full w-full object-cover"
+            draggable={false}
+          />
+        </motion.div>
 
         <div
-          className={`pointer-events-none absolute inset-0 z-1 transition-opacity duration-200 ${hovered ? 'opacity-90' : 'opacity-100'} bg-linear-to-b from-transparent ${isDark ? 'via-black/10 to-black/90' : 'via-white/10 to-white/90'}`}
+          className={`pointer-events-none absolute inset-0 z-[1] transition-opacity duration-200 ${hovered ? 'opacity-90' : 'opacity-100'} bg-gradient-to-b from-transparent ${isDark ? 'via-black/10 to-black/90' : 'via-white/10 to-white/90'}`}
         />
 
         <AnimatePresence>
           {hovered && (
             <motion.div
-              className="absolute inset-0 z-2 pointer-events-none overflow-hidden"
+              className="absolute inset-0 z-[2] pointer-events-none overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.12 }}
             >
               <motion.div
-                className={`absolute left-0 right-0 h-0.5 ${isDark ? 'bg-white/40 shadow-[0_0_12px_rgba(255,255,255,0.6)]' : 'bg-black/30'}`}
+                className={`absolute left-0 right-0 h-[2px] ${isDark ? 'bg-white/40 shadow-[0_0_12px_rgba(255,255,255,0.6)]' : 'bg-black/30'}`}
                 initial={{ top: '0%' }}
                 animate={{ top: '100%' }}
                 transition={{ duration: 0.75, ease: 'linear' }}
@@ -86,7 +80,7 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
         </AnimatePresence>
 
         <motion.span
-          className={`absolute top-4 left-4 z-3 px-2.5 py-1 rounded-full border backdrop-blur-sm text-xs font-mono ${isDark ? 'border-white/10 bg-black/40 text-white/60' : 'border-black/10 bg-white/60 text-black/60'}`}
+          className={`absolute top-4 left-4 z-[3] px-2.5 py-1 rounded-full border backdrop-blur-sm text-xs font-mono ${isDark ? 'border-white/10 bg-black/40 text-white/60' : 'border-black/10 bg-white/60 text-black/60'}`}
           animate={{ y: hovered ? -6 : 0, scale: hovered ? 1.05 : 1 }}
           transition={snap}
         >
@@ -96,7 +90,7 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
         <AnimatePresence>
           {hovered && (
             <motion.div
-              className="absolute top-4 right-4 z-3 flex gap-2"
+              className="absolute top-4 right-4 z-[3] flex gap-2"
               initial={{ opacity: 0, y: -12, scale: 0.6 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.7 }}
@@ -144,7 +138,7 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
           {project.tech.map((t, ti) => (
             <motion.span
               key={t}
-              className={`px-2 py-0.5 rounded border text-xs font-mono ${isDark ? 'border-white/8 bg-white/4 text-white/40' : 'border-black/8 bg-black/3 text-black/40'}`}
+              className={`px-2 py-0.5 rounded border text-xs font-mono ${isDark ? 'border-white/8 bg-white/[0.04] text-white/40' : 'border-black/8 bg-black/[0.03] text-black/40'}`}
               animate={hovered ? { opacity: 1, y: 0, scale: 1.04 } : { opacity: 0.55, y: 4, scale: 1 }}
               transition={{ ...snap, delay: ti * 0.02 }}
             >
@@ -208,5 +202,4 @@ export default function ProjectCard({ project, index, visible, isDark }: Project
       )}
     </motion.div>
   );
-}
-
+};

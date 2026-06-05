@@ -1,39 +1,55 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-export const ThemeContext = createContext<{
-  theme: string;
-  setTheme: (theme: string) => void;
-} | null>(null);
+type Theme = 'dark' | 'light';
+
+interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'dark',
+  toggleTheme: () => {},
+});
+
+function readStoredTheme(): Theme {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {
+    /* ignore */
+  }
+  return 'dark';
+}
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<string>('dark');
-  const [mounted, setMounted] = useState(false);
+  // Always start with "dark" so server and client HTML match on first paint.
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
-    // Prevent hydration mismatch
-    setMounted(true);
-    
-    // Apply theme to html element
-    const htmlElement = document.documentElement;
-    htmlElement.classList.remove('light', 'dark');
-    htmlElement.classList.add(theme);
+    setTheme(readStoredTheme());
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove('dark', 'light');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {mounted ? children : null}
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
     </ThemeContext.Provider>
   );
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
-
-  if (!context) {
-    throw new Error('useTheme must be used inside Providers');
-  }
-
-  return context;
+  return useContext(ThemeContext);
 }

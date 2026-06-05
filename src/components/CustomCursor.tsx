@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
@@ -21,11 +21,11 @@ export default function CustomCursor() {
   const trailSmoothX = useSpring(trailX, { damping: 40, stiffness: 150, mass: 0.8 });
   const trailSmoothY = useSpring(trailY, { damping: 40, stiffness: 150, mass: 0.8 });
 
-  const trailIdRef = useRef(0);
+  let trailId = 0;
 
   const addTrail = useCallback((x: number, y: number) => {
     setTrails((prev) => {
-      const newTrails = [...prev, { x, y, id: trailIdRef.current++ }];
+      const newTrails = [...prev, { x, y, id: trailId++ }];
       if (newTrails.length > 8) newTrails.shift();
       return newTrails;
     });
@@ -97,10 +97,10 @@ export default function CustomCursor() {
   return (
     <>
       {/* Trail particles */}
-      {trails.map((trail) => (
+      {trails.map((trail, i) => (
         <motion.div
           key={trail.id}
-          className="fixed top-0 left-0 pointer-events-none z-9998 mix-blend-difference"
+          className="fixed top-0 left-0 pointer-events-none z-[9998] mix-blend-difference"
           initial={{ opacity: 0.4, scale: 1 }}
           animate={{ opacity: 0, scale: 0.2 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -115,7 +115,7 @@ export default function CustomCursor() {
 
       {/* Outer glow ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-9997 mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9997] mix-blend-difference"
         style={{ x: trailSmoothX, y: trailSmoothY }}
         animate={{
           width: hovered ? 72 : 52,
@@ -129,7 +129,7 @@ export default function CustomCursor() {
 
       {/* Main cursor dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
         style={{ x: smoothX, y: smoothY }}
         animate={{
           width: clicked ? 8 : hovered ? 16 : 11,

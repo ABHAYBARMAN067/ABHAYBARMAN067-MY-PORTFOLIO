@@ -8,23 +8,34 @@ import AnimatedText from '../components/AnimatedText';
 import ProjectCard from '../components/ProjectCard';
 
 const projects = [
-
   
+  {
+    title: 'TripNest - Travel Listing Platform',
+    description: 'A full-stack Airbnb-inspired travel booking platform built with Next.js and TypeScript. Features secure authentication, property listings, booking management, reviews, interactive maps, wishlist, and host dashboard functionality.',
+    image: '/images/tripnest.png',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'MongoDB',
+      'NextAuth.js',
+      'Tailwind CSS',
+      'Cloudinary',
+      'Leaflet'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/TripNext',
+    live: '#',
+    category: 'Full Stack'
+  },
+  {
+    title: 'IIT Bombay Techfest Landing Page',
+    description: 'A modern, responsive, and animated landing page for Techfest IIT Bombay built using HTML, CSS, and JavaScript with GSAP animations, scroll effects, and mobile-friendly navigation.',
+    image: '/images/techfest.png',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger'],
+    github: 'https://github.com/ABHAYBARMAN067/IIT-BOMBAY-TASK-2',
+    live: '#',
+    category: 'Frontend'
+  },
 
-
-
-
-{
-  title: 'IIT Bombay Techfest Landing Page',
-  description: 'A modern, responsive, and animated landing page for Techfest IIT Bombay built using HTML, CSS, and JavaScript with GSAP animations, scroll effects, and mobile-friendly navigation.',
-  tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger'],
-  github: '',
-  live: '#',
-  category: 'Frontend'
-},
-
-
- 
 ];
 
 export default function Projects() {

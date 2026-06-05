@@ -6,16 +6,17 @@ import { useTheme } from '../hooks/useTheme';
 
 const socials = [
   { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
- 
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/', label: 'LinkedIn' },
+  { icon: Codepen, href: 'https://codepen.io/Abhay-Barman', label: 'CodePen' },
 ];
 
 export default function Footer() {
-  const{ theme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   return (
-    <footer className={`relative border-t py-4 px-6 transition-colors duration-500 ${isDark ? 'border-white/5' : 'border-black/5'}`}>
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+    <footer className={`relative border-t py-10 px-6 transition-colors duration-500 ${isDark ? 'border-white/5' : 'border-black/5'}`}>
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className={`font-mono text-sm transition-colors ${isDark ? 'text-white/30' : 'text-black/30'}`}>
           <span suppressHydrationWarning>&copy; {new Date().getFullYear()}</span> Abhay Barman. All rights reserved.
         </div>
@@ -26,11 +27,7 @@ export default function Footer() {
             </motion.a>
           ))}
         </div>
-        {/* <p className={`text-xs font-mono transition-colors ${isDark ? 'text-white/20' : 'text-black/20'}`}>
-          Built with React & Tailwind CSS
-        </p> */}
-        {/* RIGHT TEXT */}
-<p
+        <p
   className={`text-xs font-mono text-center md:text-right transition-colors ${
     isDark ? 'text-white/20' : 'text-black/20'
   }`}

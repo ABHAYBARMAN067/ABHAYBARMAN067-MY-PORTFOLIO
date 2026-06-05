@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useMounted } from '../hooks/useMounted';
+import { useMounted } from '@/hooks/useMounted';
 
 type ClientOnlyProps = {
   children: ReactNode;
@@ -13,4 +13,3 @@ export default function ClientOnly({ children, fallback = null }: ClientOnlyProp
   if (!mounted) return fallback;
   return children;
 }
-

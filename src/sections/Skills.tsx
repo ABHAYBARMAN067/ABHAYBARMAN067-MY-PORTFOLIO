@@ -12,9 +12,9 @@ import {
   SiCss,
   SiGithub,
   SiPostman,
-  SiNextdotjs,
   SiTypescript,
   SiFramer,
+  SiNextdotjs,
   SiWordpress,
   SiGit,
 } from 'react-icons/si';
@@ -79,7 +79,10 @@ const mainTechStack = [
   { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
   { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'Framer', icon: SiFramer, color: '#E11D48' },
+  { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
   { name: 'CSS', icon: SiCss, color: '#1572B6' },
+  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
   { name: 'WordPress', icon: SiWordpress, color: '#21759B' },
   { name: 'Git', icon: SiGit, color: '#F1502F' },
   { name: 'GitHub', icon: SiGithub, color: '#ffffff' },
@@ -157,8 +160,8 @@ function SkillBars({
               <motion.div
                 className={`h-full rounded-full ${
                   isDark
-                    ? 'bg-linear-to-r from-white/60 to-white/20'
-                    : 'bg-linear-to-r from-black/60 to-black/20'
+                    ? 'bg-gradient-to-r from-white/60 to-white/20'
+                    : 'bg-gradient-to-r from-black/60 to-black/20'
                 }`}
                 initial={{ width: 0 }}
                 animate={visible ? { width: `${level}%` } : { width: 0 }}
@@ -214,7 +217,7 @@ export default function Skills() {
         </motion.div>
 
         {/* Skill cards grid */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-20 lg:mb-32 lg:perspective-distant">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-20 lg:mb-32 lg:perspective-[1200px]">
           {skillGroups.map(({ category, skills }, gi) => (
             <motion.div
               key={category}
@@ -226,8 +229,8 @@ export default function Skills() {
               <div
                 className={`lg:hidden rounded-xl p-3.5 sm:p-5 border ${
                   isDark
-                    ? 'bg-white/4 border-white/10'
-                    : 'bg-black/3 border-black/10'
+                    ? 'bg-white/[0.04] border-white/10'
+                    : 'bg-black/[0.03] border-black/10'
                 }`}
               >
                 <SkillBars
@@ -242,14 +245,14 @@ export default function Skills() {
               </div>
 
               {/* Desktop: flip on hover */}
-              <div className="hidden lg:block group h-120">
+              <div className="hidden lg:block group h-[480px]">
                 <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
                   {/* Front */}
                   <div
                     className={`absolute inset-0 rounded-2xl p-8 backface-hidden z-10 flex flex-col justify-center items-center text-center border ${
                       isDark
-                        ? 'bg-white/4 border-white/10'
-                        : 'bg-black/3 border-black/10'
+                        ? 'bg-white/[0.04] border-white/10'
+                        : 'bg-black/[0.03] border-black/10'
                     }`}
                   >
                     <h2
@@ -289,7 +292,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 40 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative mt-6 sm:mt-10 lg:mt-14 w-screen left-1/2 right-1/2 ml-[-50vw] mr-[-50vw]"
+          className="relative mt-6 sm:mt-10 lg:mt-14 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
         >
           <style>{`
             @keyframes slideLeft {
@@ -318,15 +321,15 @@ export default function Skills() {
             <div
               className={`absolute left-0 top-0 h-full w-12 sm:w-32 z-20 pointer-events-none ${
                 isDark
-                  ? 'bg-linear-to-r from-black via-black/80 to-transparent'
-                  : 'bg-linear-to-r from-light-bg via-light-bg/80 to-transparent'
+                  ? 'bg-gradient-to-r from-black via-black/80 to-transparent'
+                  : 'bg-gradient-to-r from-light-bg via-light-bg/80 to-transparent'
               }`}
             />
             <div
               className={`absolute right-0 top-0 h-full w-12 sm:w-32 z-20 pointer-events-none ${
                 isDark
-                  ? 'bg-linear-to-l from-black via-black/80 to-transparent'
-                  : 'bg-linear-to-l from-light-bg via-light-bg/80 to-transparent'
+                  ? 'bg-gradient-to-l from-black via-black/80 to-transparent'
+                  : 'bg-gradient-to-l from-light-bg via-light-bg/80 to-transparent'
               }`}
             />
 
@@ -335,7 +338,7 @@ export default function Skills() {
                 {[...mainTechStack, ...mainTechStack].map((tech, index) => (
                   <motion.div
                     key={`${tech.name}-${index}`}
-                    className="group flex flex-col items-center gap-2 sm:gap-4 shrink-0"
+                    className="group flex flex-col items-center gap-2 sm:gap-4 flex-shrink-0"
                     animate={{ y: [0, -10, 0] }}
                     transition={{
                       duration: 4 + (index % 5) * 0.8,

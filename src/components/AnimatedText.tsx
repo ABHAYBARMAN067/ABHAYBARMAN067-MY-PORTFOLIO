@@ -6,7 +6,6 @@ interface AnimatedTextProps {
   text: string;
   className?: string;
   delay?: number;
-  once?: boolean;
 }
 
 const wordContainer: Variants = {

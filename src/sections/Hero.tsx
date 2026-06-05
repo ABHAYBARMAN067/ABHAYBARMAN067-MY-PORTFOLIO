@@ -5,7 +5,7 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import { Github, Linkedin, Codepen } from 'lucide-react';
-import useTypingEffect from '../hooks/useTypingEffect';
+import { useTypingEffect } from '../hooks/useTypingEffect';
 import { useTheme } from '../hooks/useTheme';
 import MagneticButton from '../components/MagneticButton';
 import ResumeButton from '../components/ResumeButton';
@@ -15,10 +15,8 @@ import gsap from 'gsap';
 
 const phrases = [
   'MERN Stack Developer',
-  // 'Full Stack Engineer',
   'React.js Enthusiast',
   'Freelancer',
-  // 'Node.js Builder',
 ];
 
 
@@ -56,7 +54,7 @@ function MagneticName({
     const chars = containerRef.current?.querySelectorAll<HTMLSpanElement>('.char');
     if (!chars || chars.length === 0) return;
 
-    let mouse = { x: 0, y: 0 };
+    const mouse = { x: 0, y: 0 };
 
     const handleMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
@@ -145,17 +143,6 @@ export default function Hero() {
       }`}
     >
       <motion.div className="relative z-10 text-center max-w-5xl" variants={container} initial="hidden" animate="show">
-        {/* <motion.div variants={item} className="inline-flex items-center gap-2 mb-8">
-          <motion.span
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono tracking-widest border transition-colors duration-500 ${
-              isDark ? 'border-white/10 bg-white/[0.03] text-white/60' : 'border-black/10 bg-black/[0.03] text-black/60'
-            }`}
-            whileHover={{ scale: 1.05 }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-slow" />Open to Opportunities
-          </motion.span>
-        </motion.div> */}
-
         <motion.h1 variants={item} className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.92] mb-6 [transform-style:preserve-3d]">
           <MagneticName text="Abhay" hoverColor isDark={isDark} className={nameClass} />
           <br />
@@ -217,3 +204,4 @@ export default function Hero() {
     </section>
   );
 }
+

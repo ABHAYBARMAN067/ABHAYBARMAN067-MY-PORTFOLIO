@@ -1,24 +1,44 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
+import { motion } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
-  const handleToggle = () => {
-    setTheme(isDark ? 'light' : 'dark');
-  };
-
   return (
-    <button
-      type="button"
-      onClick={handleToggle}
-      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="inline-flex size-10 items-center justify-center rounded-full border border-light-muted/25 bg-light-elevated text-light-text shadow-sm transition hover:-translate-y-0.5 hover:border-light-text/40 dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:border-white/35"
+    <motion.button
+      onClick={toggleTheme}
+      className="relative w-14 h-7 rounded-full flex items-center px-1 transition-colors duration-300"
+      style={{
+        backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)'}`,
+      }}
+      whileTap={{ scale: 0.95 }}
+      aria-label="Toggle theme"
     >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
-    </button>
+      <motion.div
+        className="w-5 h-5 rounded-full flex items-center justify-center"
+        animate={{
+          x: isDark ? 24 : 0,
+          backgroundColor: isDark ? '#1F2124' : '#efede8',
+        }}
+        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      >
+        <motion.div
+          initial={false}
+          animate={{ rotate: isDark ? 0 : 180, scale: [1, 0.8, 1] }}
+          transition={{ duration: 0.4 }}
+        >
+          {isDark ? (
+            <Moon size={12} className="text-white" />
+          ) : (
+            <Sun size={12} className="text-yellow-500" />
+          )}
+        </motion.div>
+      </motion.div>
+    </motion.button>
   );
 }

@@ -22,7 +22,7 @@ const profiles = [
     handle: 'Abhay Barman',
     description: 'Professional network, experience showcase, and industry connections.',
     stats: 'Connect',
-    href: '',
+    href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/',
   },
 
   {
@@ -30,8 +30,8 @@ const profiles = [
     platform: 'CodePen',
     handle: '@abhaybarman',
     description: 'Frontend UI experiments, small projects, and UI components.',
-    // stats: '+ Pens',
-    href:'',
+    stats: 'Explore',
+    href: 'https://codepen.io/Abhay-Barman',
   },
 ];
 
@@ -55,7 +55,7 @@ export default function CodingProfiles() {
           {profiles.map(({ icon: Icon, platform, handle, description, stats, href }, i) => (
             <MagneticButton key={platform} strength={0.15}>
               <motion.a href={href} target="_blank" rel="noopener noreferrer" className="group relative glass rounded-2xl p-6 overflow-hidden block" initial={{ opacity: 0, y: 30 }} animate={visible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: i * 0.15 }} whileHover={{ y: -8, scale: 1.02 }}>
-                <motion.div className={`absolute inset-0 bg-linear-to-br to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isDark ? 'from-white/4' : 'from-black/3'}`} />
+                <motion.div className={`absolute inset-0 bg-gradient-to-br to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isDark ? 'from-white/[0.04]' : 'from-black/[0.03]'}`} />
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-5">
                     <motion.div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${isDark ? 'bg-white/5 group-hover:bg-white/10' : 'bg-black/5 group-hover:bg-black/10'}`} whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}>

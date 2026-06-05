@@ -1,8 +1,6 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 
-export default function useTypingEffect(phrases: string[], speed = 80, deleteSpeed = 50, pauseTime = 2000) {
+export function useTypingEffect(phrases: string[], speed = 80, deleteSpeed = 50, pauseTime = 2000) {
   const [displayed, setDisplayed] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useTheme } from '../hooks/useTheme';
-import { Mail, Phone, Github, Linkedin, Code2, Send, Check } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, Send, Check } from 'lucide-react';
 import AnimatedText from '../components/AnimatedText';
 import MagneticButton from '../components/MagneticButton';
 import ClientOnly from '../components/ClientOnly';
@@ -26,7 +26,6 @@ const contactInfo = [
 const socials = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/ABHAYBARMAN067' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/' },
-  // { icon: Code2, label: 'LeetCode', href: 'https://leetcode.com/abhaybarman' },
 ];
 
 const contactFallbackMessage = 'Please send mail to my email ID';
