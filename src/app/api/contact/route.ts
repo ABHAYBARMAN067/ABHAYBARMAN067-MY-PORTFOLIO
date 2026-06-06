@@ -46,6 +46,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    
+
     const body = await request.json();
     const name = typeof body.name === 'string' ? body.name.trim() : '';
     const email = typeof body.email === 'string' ? body.email.trim() : '';
