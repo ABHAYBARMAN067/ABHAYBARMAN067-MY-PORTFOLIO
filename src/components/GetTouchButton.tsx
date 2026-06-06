@@ -20,7 +20,6 @@ const GetTouchButton: React.FC<GetTouchButtonProps> = ({ onClick }) => {
     e.stopPropagation();
     onClick?.();
     
-    // Reset button to idle state after 2 seconds
     setTimeout(() => {
       setStatus('idle');
     }, 2000);

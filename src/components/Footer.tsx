@@ -15,7 +15,7 @@ export default function Footer() {
   const isDark = theme === 'dark';
 
   return (
-    <footer className={`relative border-t py-10 px-6 transition-colors duration-500 ${isDark ? 'border-white/5' : 'border-black/5'}`}>
+    <footer className={`relative border-t py-4 px-6 transition-colors duration-500 ${isDark ? 'border-white/5' : 'border-black/5'}`}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className={`font-mono text-sm transition-colors ${isDark ? 'text-white/30' : 'text-black/30'}`}>
           <span suppressHydrationWarning>&copy; {new Date().getFullYear()}</span> Abhay Barman. All rights reserved.
