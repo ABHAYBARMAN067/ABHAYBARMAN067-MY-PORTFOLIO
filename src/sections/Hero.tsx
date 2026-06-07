@@ -14,9 +14,9 @@ import { scrollToSection } from '@/lib/scrollToSection';
 import gsap from 'gsap';
 
 const phrases = [
-  'MERN Stack Developer',
-  'React.js Enthusiast',
-  // 'Freelancer',
+ 'React.js Enthusiast',
+'Building Web Apps with React',
+
 ];
 
 
