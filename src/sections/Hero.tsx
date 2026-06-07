@@ -16,7 +16,7 @@ import gsap from 'gsap';
 const phrases = [
   'MERN Stack Developer',
   'React.js Enthusiast',
-  'Freelancer',
+  // 'Freelancer',
 ];
 
 
