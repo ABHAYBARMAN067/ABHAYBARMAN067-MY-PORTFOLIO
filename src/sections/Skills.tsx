@@ -11,7 +11,6 @@ import {
   SiCss,
   SiGithub,
   SiPostman,
- 
   SiGit,
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
@@ -74,7 +73,6 @@ const mainTechStack = [
   { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
   { name: 'CSS', icon: SiCss, color: '#1572B6' },
   { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'WordPress', icon: SiWordpress, color: '#21759B' },
   { name: 'Git', icon: SiGit, color: '#F1502F' },
   { name: 'GitHub', icon: SiGithub, color: '#ffffff' },
 ];
