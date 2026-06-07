@@ -11,7 +11,7 @@ import {
   SiCss,
   SiGithub,
   SiPostman,
-  SiWordpress,
+ 
   SiGit,
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
