@@ -7,14 +7,10 @@ import {
   SiExpress,
   SiMongodb,
   SiJavascript,
-  SiTailwindcss,
   SiHtml5,
   SiCss,
   SiGithub,
   SiPostman,
-  SiTypescript,
-  SiFramer,
-  SiNextdotjs,
   SiWordpress,
   SiGit,
 } from 'react-icons/si';
@@ -44,7 +40,6 @@ const skillGroups: SkillGroup[] = [
       { name: 'CSS', level: 90, icon: SiCss, color: '#1572B6' },
       { name: 'JavaScript', level: 88, icon: SiJavascript, color: '#F7DF1E' },
       { name: 'React.js', level: 85, icon: SiReact, color: '#61DAFB' },
-      { name: 'Tailwind CSS', level: 87, icon: SiTailwindcss, color: '#06B6D4' },
     ],
   },
   {
@@ -73,13 +68,9 @@ const categoryDescriptions: Record<string, string> = {
 
 const mainTechStack = [
   { name: 'React', icon: SiReact, color: '#61DAFB' },
-  { name: 'Next.js', icon: SiNextdotjs, color: '#ffffff' },
   { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
   { name: 'Express', icon: SiExpress, color: '#ffffff' },
   { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
-  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-  { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
-  { name: 'Framer', icon: SiFramer, color: '#E11D48' },
   { name: 'HTML', icon: SiHtml5, color: '#E34F26' },
   { name: 'CSS', icon: SiCss, color: '#1572B6' },
   { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
