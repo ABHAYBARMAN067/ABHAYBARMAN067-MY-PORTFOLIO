@@ -6,14 +6,57 @@ import { useTheme } from '../hooks/useTheme';
 import { Briefcase, Code2, BookOpen, Award } from 'lucide-react';
 import AnimatedText from '../components/AnimatedText';
 
-
 const timeline = [
+  {
+    icon: Briefcase,
+    type: 'Freelancing',
+    title: 'Freelance MERN Stack & WordPress Developer',
+    company: 'Self-Employed',
+    period: '2025 - Present',
+    description:
+      'Worked on freelance web development projects including MERN stack applications and WordPress websites with responsive UI, REST APIs, deployment, and client-focused solutions.',
+    tags: [
+      'MERN Stack',
+      'WordPress',
+      'REST APIs',
+      'Responsive Design',
+      'Client Projects',
+      'Deployment'
+    ]
+  },
 
+  {
+    icon: Award,
+    type: 'Virtual Internship',
+    title: 'ServiceNow Internship',
+    company: 'AICTE - SmartBridge (ServiceNow University)',
+     period: 'Feb 2026 - Apr 2026',
+    description:
+      'Completed training on ServiceNow fundamentals including Flows, ATF, Reports, and AI-based automation concepts.',
+    tags: ['ServiceNow', 'ATF', 'Automation', 'Workflows']
+  },
 
-  
+  {
+    icon: Award,
+    type: 'Internship',
+    title: 'React.js Internship',
+    company: 'Badkul Technology Pvt. Ltd.',
+    period: 'Sep 2025 ',
+    description:
+      'Completed React.js internship with hands-on frontend development experience and contribution to UI-based tasks.',
+    tags: ['React.js', 'JavaScript', 'Frontend Development']
+  },
 
-
-
+  {
+    icon: Code2,
+    type: 'Projects',
+    title: 'Full Stack Project Development',
+    company: 'Personal Projects',
+    period: '2023 - Present',
+    description:
+      'Developed multiple real-world MERN stack applications including booking systems, CRUD applications, authentication systems, and admin dashboards.',
+    tags: ['MERN Stack', 'JWT', 'REST APIs', 'Tailwind CSS']
+  },
 
   {
     icon: BookOpen,
@@ -21,13 +64,22 @@ const timeline = [
     title: 'B.Tech in Computer Science (Final Year)',
     company: 'Shri Ram Institute of Science and Technology',
     period: '2022 - 2026',
-    description: 'Currently pursuing B.Tech in Computer Science with focus on full-stack web development and software engineering fundamentals.',
+    description:
+      'Currently pursuing B.Tech in Computer Science with focus on full-stack web development and software engineering fundamentals.',
     tags: ['Computer Science', 'Software Engineering', 'Problem Solving']
   },
 
-
+  {
+    icon: BookOpen,
+    type: 'Learning',
+    title: 'MERN Stack Development (Self Learning)',
+    company: 'Self-Study & Courses',
+    period: '2022 - 2023',
+    description:
+      'Built strong foundation in web development through structured learning and hands-on practice in frontend and backend technologies.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Node.js']
+  }
 ];
-
 
 export default function Experience() {
   const { ref, visible } = useScrollReveal();
