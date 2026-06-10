@@ -14,8 +14,7 @@ export default function PortfolioLoader() {
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2200);
     return () => clearTimeout(timer);
-  }, []);
-
+  }, [])
   return (
     <>
       <LoadingScreen isLoading={loading} />

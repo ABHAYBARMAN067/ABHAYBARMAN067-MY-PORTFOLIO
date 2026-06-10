@@ -14,7 +14,7 @@ type Project = {
   image: string;
   tech: string[];
   github: string;
-  live: string;
+  live: string
   category: string;
 };
 

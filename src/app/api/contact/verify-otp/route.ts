@@ -1,5 +1,8 @@
+// COMMENTED OUT - Using direct send instead of OTP
+/*
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { otpStore } from '../../../../lib/otp-store';
 
 export const runtime = 'nodejs';
 
@@ -8,25 +11,49 @@ function getEnv(name: string): string | undefined {
   return value || undefined;
 }
 
+function escapeHtml(text: string): string {
+  const map: { [key: string]: string } = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const name = typeof body.name === 'string' ? body.name.trim() : '';
     const email = typeof body.email === 'string' ? body.email.trim() : '';
+    const otp = typeof body.otp === 'string' ? body.otp.trim() : '';
+    const name = typeof body.name === 'string' ? body.name.trim() : '';
     const message = typeof body.message === 'string' ? body.message.trim() : '';
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: 'Name, email, and message are required.' }, { status: 400 });
+    // Validate OTP
+    if (!email || !otp) {
+      return NextResponse.json({ error: 'Email and OTP are required.' }, { status: 400 });
     }
 
-    if (name.length > 100 || email.length > 254 || message.length > 5000) {
+    const storedOTP = otpStore[email];
+    if (!storedOTP) {
+      return NextResponse.json({ error: 'OTP not found. Please request a new one.' }, { status: 400 });
+    }
+
+    if (storedOTP.expiresAt < Date.now()) {
+      delete otpStore[email];
+      return NextResponse.json({ error: 'OTP has expired. Please request a new one.' }, { status: 400 });
+    }
+
+    if (storedOTP.otp !== otp) {
+      return NextResponse.json({ error: 'Invalid OTP. Please try again.' }, { status: 400 });
+    }
+
+    // OTP is valid, now process the contact message
+    if (!name || !message) {
+      return NextResponse.json({ error: 'Name and message are required.' }, { status: 400 });
+    }
+
+    if (name.length > 100 || message.length > 5000) {
       return NextResponse.json({ error: 'Message is too long.' }, { status: 400 });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
-    }
+    // Delete OTP after successful verification
+    delete otpStore[email];
 
     const host = getEnv('SMTP_HOST');
     const user = getEnv('SMTP_USER');
@@ -52,6 +79,7 @@ export async function POST(request: NextRequest) {
 
     const from = getEnv('SMTP_FROM') ?? `"Abhay Barman" <${user}>`;
 
+    // Send to admin
     await transporter.sendMail({
       from,
       to,
@@ -75,6 +103,7 @@ export async function POST(request: NextRequest) {
       `,
     });
 
+    // Send confirmation to user
     try {
       await transporter.sendMail({
         from,
@@ -84,7 +113,7 @@ export async function POST(request: NextRequest) {
         text: [
           `Hi ${name},`,
           ``,
-          `Thanks for contacting me. I received your message and will reply to you as soon as possible.`,
+          `Thanks for contacting me. I received your message and will reply soon.`,
           ``,
           `Best regards,`,
           `Abhay Barman`,
@@ -98,75 +127,41 @@ export async function POST(request: NextRequest) {
               </div>
               <div style="padding:28px;">
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Hi ${escapeHtml(name)},</p>
-                <p style="margin:0 0 22px;font-size:16px;line-height:1.7;color:#3f3f46;">
-                  Thanks for contacting me. I received your message and will reply to you as soon as possible.
-                </p>
-                <div style="margin:24px 0;padding:16px 18px;border-left:4px solid #22c55e;background:#f0fdf4;border-radius:8px;">
-                  <p style="margin:0;font-size:14px;line-height:1.6;color:#166534;">
-                    Your message has been delivered successfully.
-                  </p>
-                </div>
-                <p style="margin:0;font-size:15px;line-height:1.6;color:#3f3f46;">
-                  Best regards,<br />
-                  <strong style="color:#18181b;">Abhay Barman</strong>
-                </p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Thanks for contacting me. I received your message and will reply to you as soon as possible.</p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Best regards,<br />Abhay Barman</p>
               </div>
-              <div style="padding:16px 28px;background:#fafafa;border-top:1px solid #e4e4e7;">
-                <p style="margin:0;font-size:12px;line-height:1.5;color:#71717a;">
-                  This is an automatic confirmation from Abhay Barman's portfolio.
-                </p>
+              <div style="background:#f9fafb;padding:20px 28px;text-align:center;border-top:1px solid #e4e4e7;">
+                <p style="margin:0;font-size:12px;color:#71717a;">© 2024 Abhay Barman. All rights reserved.</p>
               </div>
             </div>
           </div>
         `,
       });
-    } catch (confirmationError) {
-      console.error('Contact API confirmation email error:', confirmationError);
+    } catch {
+      // Confirmation email failed, but main email was sent successfully
+      console.error('Failed to send confirmation email');
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: 'Message sent successfully!' });
   } catch (error) {
-    console.error('Contact API error:', error);
-
-    const maybeMailError = error as {
-      code?: string;
-      command?: string;
-      responseCode?: number;
-      response?: string;
-    };
-
-    if (
-      maybeMailError.code === 'EAUTH' ||
-      maybeMailError.responseCode === 534 ||
-      maybeMailError.responseCode === 535
-    ) {
-      return NextResponse.json(
-        {
-          error: 'Please send mail to my email ID',
-        },
-        { status: 502 },
-      );
-    }
-
-    if (maybeMailError.code === 'ETIMEDOUT' || maybeMailError.code === 'ESOCKET') {
-      return NextResponse.json(
-        { error: 'Please send mail to my email ID' },
-        { status: 502 },
-      );
-    }
-
+    console.error('Verify OTP error:', error);
     return NextResponse.json(
-      { error: 'Please send mail to my email ID' },
+      { error: 'Failed to process your request. Please try again later.' },
       { status: 500 },
     );
   }
 }
+*/
 
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+
+
+import { NextRequest, NextResponse } from 'next/server';
+
+export const runtime = 'nodejs';
+
+export async function POST(request: NextRequest) {
+  return NextResponse.json(
+    { error: 'This endpoint has been deprecated. Please use /api/contact instead.' },
+    { status: 410 }
+  );
 }

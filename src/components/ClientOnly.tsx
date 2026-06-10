@@ -10,6 +10,6 @@ type ClientOnlyProps = {
 
 export default function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
   const mounted = useMounted();
-  if (!mounted) return fallback;
+  
   return children;
 }

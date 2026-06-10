@@ -8,11 +8,6 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  title: 'Abhay Barman | MERN Stack Developer',
-  description:
-    'Portfolio of Abhay Barman - MERN stack developer building performant, scalable web applications.',
-};
 
 export default function RootLayout({
   children,
