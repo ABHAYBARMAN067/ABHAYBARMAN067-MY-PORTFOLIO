@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
         text: [
           `Hi ${name},`,
           ``,
-          `Thanks for contacting me. I received your message and will reply to you as soon as possible.`,
+          `Thanks for contacting me. I received your message and will reply soon.`,
           ``,
           `Best regards,`,
           `Abhay Barman`,
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
               <div style="padding:28px;">
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Hi ${escapeHtml(name)},</p>
                 <p style="margin:0 0 22px;font-size:16px;line-height:1.7;color:#3f3f46;">
-                  Thanks for contacting me. I received your message and will reply to you as soon as possible.
+                  Thanks for contacting me. I received your message and will reply soon.
                 </p>
                 <div style="margin:24px 0;padding:16px 18px;border-left:4px solid #22c55e;background:#f0fdf4;border-radius:8px;">
                   <p style="margin:0;font-size:14px;line-height:1.6;color:#166534;">

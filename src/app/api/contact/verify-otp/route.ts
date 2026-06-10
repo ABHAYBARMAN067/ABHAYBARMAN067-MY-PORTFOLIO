@@ -1,5 +1,3 @@
-// COMMENTED OUT - Using direct send instead of OTP
-/*
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { otpStore } from '../../../../lib/otp-store';
@@ -150,18 +148,4 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
-}
-*/
-
-
-
-import { NextRequest, NextResponse } from 'next/server';
-
-export const runtime = 'nodejs';
-
-export async function POST(request: NextRequest) {
-  return NextResponse.json(
-    { error: 'This endpoint has been deprecated. Please use /api/contact instead.' },
-    { status: 410 }
-  );
 }
