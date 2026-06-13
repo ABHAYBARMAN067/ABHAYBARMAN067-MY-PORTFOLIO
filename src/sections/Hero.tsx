@@ -8,8 +8,9 @@ import { Github, Linkedin, Codepen } from 'lucide-react';
 import { useTypingEffect } from '../hooks/useTypingEffect';
 import { useTheme } from '../hooks/useTheme';
 import MagneticButton from '../components/MagneticButton';
-import ResumeButton from '../components/ResumeButton';
+import MyWorkButton from '../components/MyWorkButton';
 import GetTouchButton from '../components/GetTouchButton';
+// import ResumeButton from '../components/ResumeButton'; // Resume Button
 import { scrollToSection } from '@/lib/scrollToSection';
 import gsap from 'gsap';
 
@@ -186,10 +187,14 @@ export default function Hero() {
 
           <div className="h-[48px] flex items-center justify-center">
             <MagneticButton strength={0.2}>
-              <ResumeButton />
+              <MyWorkButton />
             </MagneticButton>
           </div>
-
+ {/* <div className="h-[48px] flex items-center justify-center">
+            <MagneticButton strength={0.2}>
+              <ResumeButton />
+            </MagneticButton>
+          </div> */}
         </motion.div>
 
         <motion.div variants={item} className="flex items-center justify-center gap-2 mb-12">
