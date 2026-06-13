@@ -2,7 +2,7 @@
 
 A modern personal portfolio built with **Next.js (App Router)**, **React**, **Tailwind CSS**, **Framer Motion**, and **GSAP**.
 
-> Live demo: *
+> Live demo: *https://abhaybarman-067-my-portfolio-mr57.vercel.app/*
 
 
 ---
@@ -135,136 +135,29 @@ npm install -D typescript @types/node @types/react @types/react-dom eslint eslin
 ```
 
 ## Project Structure
-
-```txt
 MY-PORTFOLIO-test/
-|-- .env.example
-|-- README.md
-|-- eslint.config.mjs
-|-- next.config.ts
-|-- package-lock.json
-|-- package.json
-|-- postcss.config.mjs
-|-- tsconfig.json
-|-- public/
-|   |-- Resume.pdf
-|   |-- globe.svg
-|   |-- next.svg
-|   `-- images/
-|       |-- BazarNow.png
-|       |-- apnakitchen.png
-|       |-- techfest.png
-|       |-- the-golden-shutter.png
-|       `-- tripnest.png
-`-- src/
-    |-- app/
-    |   |-- globals.css
-    |   |-- layout.tsx
-    |   |-- page.tsx
-    |   |-- providers.tsx
-    |   `-- api/
-    |       `-- contact/
-    |           |-- route.ts
-    |           |-- send-otp/
-    |           |   `-- route.ts
-    |           `-- verify-otp/
-    |               `-- route.ts
-    |-- components/
-    |   |-- AnimatedGradient.tsx
-    |   |-- AnimatedText.tsx
-    |   |-- ClientOnly.tsx
-    |   |-- CustomCursor.tsx
-    |   |-- Footer.tsx
-    |   |-- GetTouchButton.tsx
-    |   |-- LoadingScreen.tsx
-    |   |-- MagneticButton.tsx
-    |   |-- Navbar.tsx
-    |   |-- Portfolio.tsx
-    |   |-- PortfolioLoader.tsx
-    |   |-- ProjectCard.tsx
-    |   |-- ResumeButton.tsx
-    |   |-- SmoothScroll.tsx
-    |   `-- ThemeToggle.tsx
-    |-- hooks/
-    |   |-- useMounted.ts
-    |   |-- useScrollReveal.ts
-    |   |-- useTheme.tsx
-    |   `-- useTypingEffect.ts
-    |-- lib/
-    |   |-- otp-store.ts
-    |   `-- scrollToSection.ts
-    `-- sections/
-        |-- About.tsx
-        |-- CodingProfiles.tsx
-        |-- Contact.tsx
-        |-- Experience.tsx
-        |-- Hero.tsx
-        |-- Projects.tsx
-        `-- Skills.tsx
-```
-
----
-
-## File Reference — What Each File Does
-
-### App (`src/app/`)
-
-| File | Role |
-| --- | --- |
-| `page.tsx` | Renders `<PortfolioLoader />` as the home page |
-| `layout.tsx` | Site metadata, Inter font, `globals.css`, wraps children in `Providers` |
-| `providers.tsx` | Provides `ThemeProvider` to the whole app |
-| `globals.css` | Tailwind theme tokens, glass utilities, cursor-none, animations |
-| `api/contact/route.ts` | Validates form JSON, sends email via Nodemailer |
-
-### Components (`src/components/`)
-
-| File | Role |
-| --- | --- |
-| `PortfolioLoader.tsx` | Shows loader ~2.2s, then loads `Portfolio` (no SSR) |
-| `Portfolio.tsx` | Composes navbar, all sections, footer, global effects |
-| `Navbar.tsx` | Navigation links, active section, Hire Me, theme toggle slot |
-| `Footer.tsx` | Copyright + social icons |
-| `LoadingScreen.tsx` | Animated loading overlay |
-| `ThemeToggle.tsx` | Sun/moon button — calls `toggleTheme()` |
-| `SmoothScroll.tsx` | Initializes Lenis + `registerLenis` for programmatic scroll |
-| `AnimatedGradient.tsx` | Full-page animated gradient blobs |
-| `ParticlesBackground.tsx` | Particle network behind content |
-| `FloatingParticles.tsx` | `GlowLine`, `FloatingOrb` decorative elements |
-| `CustomCursor.tsx` | Custom cursor + trail (skipped on touch devices) |
-| `ClientOnly.tsx` | Renders children only after mount (avoids hydration issues) |
-| `AnimatedText.tsx` | Staggered character animation for headings |
-| `MagneticButton.tsx` | Wraps children with magnetic pointer effect |
-| `GetTouchButton.tsx` | 3D pill button → scrolls to `#contact` |
-| `ResumeButton.tsx` | 3D pill button → downloads resume PDF |
-| `ProjectCard.tsx` | Project image, tech tags, links, tilt on hover |
-
-### Sections (`src/sections/`)
-
-| File | Role |
-| --- | --- |
-| `Hero.tsx` | Name (magnetic letters), typing roles, CTAs, social links, theme-aware styles |
-| `About.tsx` | Personal story + scroll reveal |
-| `Skills.tsx` | Frontend / backend / tools skill blocks |
-| `Projects.tsx` | Project data array + grid of `ProjectCard` |
-| `Experience.tsx` | Timeline of roles / internships |
-| `CodingProfiles.tsx` | External profile cards (GitHub, LeetCode, etc.) |
-| `Contact.tsx` | Form POST to `/api/contact`, contact details |
-
-### Hooks (`src/hooks/`)
-
-| File | Role |
-| --- | --- |
-| `useTheme.tsx` | `theme`, `toggleTheme`, syncs `dark`/`light` class on `<html>` |
-| `useTypingEffect.ts` | Cycles phrases with type/delete effect (Hero) |
-| `useScrollReveal.ts` | Returns `ref` + `visible` when section enters viewport |
-| `useMounted.ts` | `true` after first client render — used by `ClientOnly` |
-
-### Lib (`src/lib/`)
-
-| File | Role |
-| --- | --- |
-| `scrollToSection.ts` | `scrollToSection('contact')` — uses Lenis if available |
+├── .env.example
+├── README.md
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── tsconfig.json
+│
+├── public/
+│   ├── Resume.pdf // if you want to apply
+│   ├── globe.svg
+│   ├── next.svg
+│   └── images/
+│     
+│
+└── src/
+    ├── app/           # Next.js routes + API
+    ├── components/    # UI components
+    ├── sections/      # Page sections (Hero, Skills, etc.)
+    ├── hooks/         # Custom React hooks
+    └── lib/           # Utilities
 
 ---
 
@@ -286,8 +179,8 @@ page.tsx
 ## Getting Started
 
 ```bash
-git clone <your-repository-url>
-cd MY-PORTFOLIO-test
+git clone <https://github.com/ABHAYBARMAN067/ABHAYBARMAN067-MY-PORTFOLIO>
+cd MY-PORTFOLIO
 npm install
 npm run dev
 ```
@@ -332,7 +225,7 @@ Place in `public/`:
 
 ## Deployment
 
-Deploy on **Vercel** (recommended). Add all SMTP variables in project environment settings.
+Deploy on **Vercel** . 
 
 ---
 
@@ -371,7 +264,4 @@ color: #ffffff;
   * Text: `#3d3a36`
 
 ---
-
-## Author
-
-**Abhay Barman** — MERN Stack Developer
+> Designed & Developed by Abhay Barman

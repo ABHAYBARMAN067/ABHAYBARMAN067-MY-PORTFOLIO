@@ -23,11 +23,7 @@ const phrases = [
 ];
 
 
-const socials = [
-  { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/', label: 'LinkedIn' },
-  { icon: Codepen, href: 'https://codepen.io/Abhay-Barman', label: 'CodePen' },
-];
+
 
 const container = {
   hidden: {},
@@ -135,6 +131,13 @@ export default function Hero() {
   const isDark = theme === 'dark';
   const typed = useTypingEffect(phrases);
 
+  
+const socials = [
+  { icon: Github, href: 'https://github.com/ABHAYBARMAN067', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-barman-9a0b3a277/', label: 'LinkedIn' },
+  { icon: Codepen, href: 'https://codepen.io/Abhay-Barman', label: 'CodePen' },
+];
+
   const scrollToContact = () => scrollToSection('contact');
 
   const nameClass = `text-6xl sm:text-7xl md:text-8xl font-black tracking-tight ${isDark ? 'text-white' : 'text-black'}`;
@@ -198,7 +201,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={item} className="flex items-center justify-center gap-2 mb-12">
-          {socials.map(({ icon: Icon, href, label }) => (
+  {socials.map(({ icon: Icon, href, label }) => (
             <MagneticButton key={label} strength={0.4}>
               <motion.a
                 href={href}
