@@ -56,12 +56,12 @@ function MagneticName({
     const chars = containerRef.current?.querySelectorAll<HTMLSpanElement>('.char');
     if (!chars || chars.length === 0) return;
 
-    let mouse = { x: 0, y: 0 };
+   const mouse = { x: 0, y: 0 };
 
-    const handleMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
+const handleMove = (e: MouseEvent) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+};
 
     window.addEventListener('mousemove', handleMove);
 

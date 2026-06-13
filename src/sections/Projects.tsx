@@ -68,7 +68,15 @@ const projects = [
   live: '#',
   category: 'Full Stack'
 },
-
+{
+  title: 'Coming Soon',
+  description: 'An exciting new project is currently under development. Stay tuned for updates and upcoming features.',
+  image: '/images/coming-soon.png',
+  tech: [],
+  github: '#',
+  live: '#',
+  category: 'Frontend'
+},
 
   // { title: 'MERN CRUD Applications', description: 'A collection of full-featured CRUD apps demonstrating best practices in the MERN stack. Includes REST API design, state management, and responsive UIs.', image: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800', tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'], github: 'https://github.com/abhaybarman', live: '#', category: 'Full Stack' },
 ];
