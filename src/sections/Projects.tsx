@@ -8,80 +8,110 @@ import AnimatedText from '../components/AnimatedText';
 import ProjectCard from '../components/ProjectCard';
 
 const projects = [
-  { title: 'The Golden Shutter', description: 'A premium photography studio booking platform with an elegant gallery showcase, session scheduling, and client management system. Fully responsive with smooth animations.', image: 'images/the-golden-shutter.png', tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
-     github: 'https://github.com/ABHAYBARMAN067/The-Golden-Shutter', 
-     live: 'https://the-golden-shutter.vercel.app/',
-      category: 'Full Stack' },
+
+
   
+  {
+    title: 'The Golden Shutter',
+    description: 'A premium photography studio booking platform with an elegant gallery showcase, session scheduling, and client management system. Fully responsive with smooth animations.',
+    image: 'images/the-golden-shutter.png',
+    tech: [
+      'React.js',
+      'Node.js',
+      'MongoDB',
+      'Express.js',
+      'Tailwind CSS'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/The-Golden-Shutter',
+    live: 'https://the-golden-shutter.vercel.app/',
+    category: 'Full Stack'
+  },
   
-{
-  title: 'TripNest - Travel Listing Platform',
-  description: 'A full-stack Airbnb-inspired travel booking platform built with Next.js and TypeScript. Features secure authentication, property listings, booking management, reviews, interactive maps, wishlist, and host dashboard functionality.',
-  image: '/images/tripnest.png',
-  tech: [
-    'Next.js',
-    'TypeScript',
-    'MongoDB',
-    'NextAuth.js',
-    'Tailwind CSS',
-    'Cloudinary',
-    'Leaflet'
-  ],
-  github: 'https://github.com/ABHAYBARMAN067/TripNext',
-  live: '#',
-  category: 'Full Stack'
-},
+  {
+    title: 'BazarNow E-Commerce Platform',
+    description: 'Advanced E-Commerce Platform with Multi-Role System, Enterprise-level MERN e-commerce system with User, Seller, Admin roles, RBAC, order tracking, and real-time updates.',
+    image: '/images/BazarNow.png',
+    tech: [
+      'React 19',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'JWT',
+      'bcryptjs',
+      'Nodemailer',
+      'Tailwind CSS',
+      'WebSocket'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/BazarNow',
+    live: '#',
+    category: 'Full Stack',
+    featured: true,
+    createdAt: '2026'
+  },
+
+  {
+    title: 'TripNest - Travel Listing Platform',
+    description: 'A full-stack Airbnb-inspired travel booking platform built with Next.js and TypeScript. Features secure authentication, property listings, booking management, reviews, interactive maps, wishlist, and host dashboard functionality.',
+    image: '/images/tripnest.png',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'MongoDB',
+      'NextAuth.js',
+      'Tailwind CSS',
+      'Cloudinary',
+      'Leaflet'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/TripNext',
+    live: '#',
+    category: 'Full Stack'
+  },
 
 
-    // {
-    //   title: 'Event Management & Booking Platform',
-    //   description: 'A full-stack MERN application for managing events and bookings. Users can browse events, book tickets with real-time seat availability, and track booking history. Admins can create events, manage bookings, and view analytics through a dashboard.',
-    //   image: '/image/event-management-booking.png',
-    //   tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Nodemailer'],
-    //   github: 'https://github.com/abhaybarman/Event-Management-Booking-Platform',
-    //   live: '#',
-    //   category: 'Full Stack'
-    //  } ,
-{
-  title: 'IIT Bombay Techfest Landing Page',
-  description: 'A modern, responsive, and animated landing page for Techfest IIT Bombay built using HTML, CSS, and JavaScript with GSAP animations, scroll effects, and mobile-friendly navigation.',
-  image: '/images/techfest.png',
-  tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger'],
-  github: 'https://github.com/ABHAYBARMAN067/IIT-BOMBAY-TASK-2',
-  live: 'https://iit-bombay-task-2.vercel.app/',
-  category: 'Frontend'
-},
-{
-  title: 'BazarNow E-Commerce Platform',
-  description: 'Advanced E-Commerce Platform with Multi-Role System, Enterprise-level MERN e-commerce system with User, Seller, Admin roles, RBAC, order tracking, and real-time updates.',
-  image: '/images/BazarNow.png',
-  tech: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'bcryptjs', 'Nodemailer', 'Tailwind CSS', 'WebSocket'],
-  github: 'https://github.com/ABHAYBARMAN067/BazarNow',
-  live: '#',
-  category: 'Full Stack',
-  featured: true,
-  createdAt: '2026'
-},
-	{
-  title: 'Hotel Reservation Form with Admin Panel',
-  description: 'A full-stack web application for hotel and restaurant management. Users can browse menu items, register/login, place food orders (dine-in or delivery), and book hotel rooms with reservations. It also includes a powerful admin panel to manage orders, reservations, and user activities efficiently.',
-  image: '/images/apnakitchen.png',
-  tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'bcryptjs', 'Tailwind CSS', 'Vite'],
-  github: 'https://github.com/ABHAYBARMAN067/hotel-table-booking-system',
-  live: 'https://hotel-table-booking-system.vercel.app/',
-  category: 'Full Stack'
-},
-{
-  title: 'Coming Soon',
-  description: 'An exciting new project is currently under development. Stay tuned for updates and upcoming features.',
-  image: '/images/coming-soon.png',
-  tech: [],
-  github: '#',
-  live: '#',
-  category: 'Frontend'
-},
+  {
+    title: 'Hotel Reservation Form with Admin Panel',
+    description: 'A full-stack web application for hotel and restaurant management. Users can browse menu items, register/login, place food orders (dine-in or delivery), and book hotel rooms with reservations. It also includes a powerful admin panel to manage orders, reservations, and user activities efficiently.',
+    image: '/images/apnakitchen.png',
+    tech: [
+      'React.js',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'JWT',
+      'bcryptjs',
+      'Tailwind CSS',
+      'Vite'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/hotel-table-booking-system',
+    live: 'https://hotel-table-booking-system.vercel.app/',
+    category: 'Full Stack'
+  },
 
-  // { title: 'MERN CRUD Applications', description: 'A collection of full-featured CRUD apps demonstrating best practices in the MERN stack. Includes REST API design, state management, and responsive UIs.', image: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800', tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'], github: 'https://github.com/abhaybarman', live: '#', category: 'Full Stack' },
+  {
+    title: 'IIT Bombay Techfest Landing Page',
+    description: 'A modern, responsive, and animated landing page for Techfest IIT Bombay built using HTML, CSS, and JavaScript with GSAP animations, scroll effects, and mobile-friendly navigation.',
+    image: '/images/techfest.png',
+    tech: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'GSAP',
+      'ScrollTrigger'
+    ],
+    github: 'https://github.com/ABHAYBARMAN067/IIT-BOMBAY-TASK-2',
+    live: 'https://iit-bombay-task-2.vercel.app/',
+    category: 'Frontend'
+  },
+
+  {
+    title: 'Coming Soon',
+    description: 'An exciting new project is currently under development. Stay tuned for updates and upcoming features.',
+    image: '/images/coming-soon.png',
+    tech: [],
+    github: '#',
+    live: '#',
+    category: 'Frontend'
+  }
 ];
 
 export default function Projects() {
