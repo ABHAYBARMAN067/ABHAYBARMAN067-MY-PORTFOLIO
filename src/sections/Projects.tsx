@@ -8,7 +8,10 @@ import AnimatedText from '../components/AnimatedText';
 import ProjectCard from '../components/ProjectCard';
 
 const projects = [
-  { title: 'The Golden Shutter', description: 'A premium photography studio booking platform with an elegant gallery showcase, session scheduling, and client management system. Fully responsive with smooth animations.', image: 'images/the-golden-shutter.png', tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'], github: 'https://github.com/abhaybarman', live: '#', category: 'Full Stack' },
+  { title: 'The Golden Shutter', description: 'A premium photography studio booking platform with an elegant gallery showcase, session scheduling, and client management system. Fully responsive with smooth animations.', image: 'images/the-golden-shutter.png', tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
+     github: 'https://github.com/ABHAYBARMAN067/The-Golden-Shutter', 
+     live: 'https://the-golden-shutter.vercel.app/',
+      category: 'Full Stack' },
   
   
 {
@@ -45,7 +48,7 @@ const projects = [
   image: '/images/techfest.png',
   tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger'],
   github: 'https://github.com/ABHAYBARMAN067/IIT-BOMBAY-TASK-2',
-  live: '#',
+  live: 'https://iit-bombay-task-2.vercel.app/',
   category: 'Frontend'
 },
 {
@@ -65,7 +68,7 @@ const projects = [
   image: '/images/apnakitchen.png',
   tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'bcryptjs', 'Tailwind CSS', 'Vite'],
   github: 'https://github.com/ABHAYBARMAN067/hotel-table-booking-system',
-  live: '#',
+  live: 'https://hotel-table-booking-system.vercel.app/',
   category: 'Full Stack'
 },
 {
